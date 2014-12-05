@@ -1,0 +1,194 @@
+; Managed Puppet.
+;
+
+;;;;;;;;;;;;;;;;;;;;;
+; FPM Configuration ;
+;;;;;;;;;;;;;;;;;;;;;
+
+<% if defined? @include -%>
+include = <%= @include %>
+<% end -%>
+
+;;;;;;;;;;;;;;;;;;
+; Global Options ;
+;;;;;;;;;;;;;;;;;;
+
+[global]
+<% if defined? @pid -%>
+pid                         = <%= @pid %>
+<% end -%>
+<% if defined? @error_log -%>
+error_log                   = <%= @error_log %>
+<% end -%>
+<% if defined? @syslog_facility -%>
+syslog.facility             = <%= @syslog_facility %>
+<% end -%>
+<% if defined? @syslog_ident -%>
+syslog.ident                = <%= @syslog_ident %>
+<% end -%>
+<% if defined? @log_level -%>
+log_level                   = <%= @log_level %>
+<% end -%>
+<% if defined? @emergency_restart_threshold -%>
+emergency_restart_threshold = <%= @emergency_restart_threshold %>
+<% end -%>
+<% if defined? @emergency_restart_interval -%>
+emergency_restart_interval  = <%= @emergency_restart_interval %>
+<% end -%>
+<% if defined? @process_control_timeout -%>
+process_control_timeout     = <%= @process_control_timeout %>
+<% end -%>
+<% if defined? @process_max -%>
+process.max                 = <%= @process_max %>
+<% end -%>
+<% if defined? @process_priority -%>
+process.priority            = <%= @process_priority %>
+<% end -%>
+<% if defined? @daemonize -%>
+daemonize                   = <%= @daemonize %>
+<% end -%>
+<% if defined? @rlimit_files -%>
+rlimit_files                = <%= @rlimit_files %>
+<% end -%>
+<% if defined? @rlimit_core -%>
+rlimit_core                 = <%= @rlimit_core %>
+<% end -%>
+<% if defined? @events_mechanism -%>
+events.mechanism            = <%= @events_mechanism %>
+<% end -%>
+<% if defined? @systemd_interval -%>
+systemd_interval            = <%= @systemd_interval %>
+<% end -%>
+
+;;;;;;;;;;;;;;;;;;;;
+; Pool Definitions ;
+;;;;;;;;;;;;;;;;;;;;
+
+<% if defined? @pool_config -%>
+<%   @pool_config.each do |name, values| -%>
+[<%= name %>]
+<%     values.each do |key, value| -%>
+<%       if key == prefix -%>
+prefix = <%= value %>
+<%       end -%>
+<%       if key == user -%>
+user = <%= value %>
+<%       end -%>
+<%       if key == group -%>
+group = <%= value %>
+<%       end -%>
+<%       if key == listen -%>
+listen = <%= value %>
+<%       end -%>
+<%       if key == listen_backlog -%>
+listen.backlog = <%= value %>
+<%       end -%>
+<%       if key == listen_owner -%>
+listen.owner = <%= value %>
+<%       end -%>
+<%       if key == listen_group -%>
+listen.group = <%= value %>
+<%       end -%>
+<%       if key == listen_mode -%>
+listen.mode = <%= value %>
+<%       end -%>
+<%       if key == listen_allowed_clients -%>
+listen.allowed_clients = <%= value %>
+<%       end -%>
+<%       if key == process_priority -%>
+process.priority = <%= value %>
+<%       end -%>
+<%       if key == pm -%>
+pm = <%= value %>
+<%       end -%>
+<%       if key == pm_max_children -%>
+pm.max_children = <%= value %>
+<%       end -%>
+<%       if key == pm_start_servers -%>
+pm.start_servers = <%= value %>
+<%       end -%>
+<%       if key == pm_min_spare_servers -%>
+pm.min_spare_servers = <%= value %>
+<%       end -%>
+<%       if key == pm_max_spare_servers -%>
+pm.max_spare_servers = <%= value %>
+<%       end -%>
+<%       if key == pm_process_idle_timeout -%>
+pm.process_idle_timeout = <%= value %>
+<%       end -%>
+<%       if key == pm_max_requests -%>
+pm.max_requests = <%= value %>
+<%       end -%>
+<%       if key == pm_status_path -%>
+pm.status_path = <%= value %>
+<%       end -%>
+<%       if key == ping_path -%>
+ping.path = <%= value %>
+<%       end -%>
+<%       if key == ping_response -%>
+ping.response = <%= value %>
+<%       end -%>
+<%       if key == access_log -%>
+access.log = <%= value %>
+<%       end -%>
+<%       if key == access_format -%>
+access.format = <%= value %>
+<%       end -%>
+<%       if key == slowlog -%>
+slowlog = <%= value %>
+<%       end -%>
+<%       if key == request_slowlog_timeout -%>
+request_slowlog_timeout = <%= value %>
+<%       end -%>
+<%       if key == request_terminate_timeout -%>
+request_terminate_timeout = <%= value %>
+<%       end -%>
+<%       if key == rlimit_files -%>
+rlimit_files = <%= value %>
+<%       end -%>
+<%       if key == rlimit_core -%>
+rlimit_core = <%= value %>
+<%       end -%>
+<%       if key == chroot -%>
+chroot = <%= value %>
+<%       end -%>
+<%       if key == chdir -%>
+chdir = <%= value %>
+<%       end -%>
+<%       if key == catch_workers_output -%>
+catch_workers_output = <%= value %>
+<%       end -%>
+<%       if key == clear_env -%>
+clear_env = <%= value %>
+<%       end -%>
+<%       if key == security_limit_extensions -%>
+security.limit_extensions = <%= value %>
+<%       end -%>
+<%       if key == env -%>
+<%         value.each do |env_key, env_value| -%>
+env[<%= env_key %>] = <%= env_value %>
+<%         end -%>
+<%       end -%>
+<%       if key == php_flag -%>
+<%         value.each do |php_flag_key, php_flag_value| -%>
+php_flag[<%= php_flag_key %>] = <%= php_flag_value %>
+<%         end -%>
+<%       end -%>
+<%       if key == php_value -%>
+<%         value.each do |php_value_key, php_value_value| -%>
+php_value[<%= php_value_key %>] = <%= php_value_value %>
+<%         end -%>
+<%       end -%>
+<%       if key == php_admin_flag -%>
+<%         value.each do |php_admin_flag_key, php_admin_flag_value| -%>
+php_admin_flag[<%= php_admin_flag_key %>] = <%= php_admin_flag_value %>
+<%         end -%>
+<%       end -%>
+<%       if key == php_admin_value -%>
+<%         value.each do |php_admin_value_key, php_admin_value_value| -%>
+php_admin_value[<%= php_admin_value_key %>] = <%= php_admin_value_value %>
+<%         end -%>
+<%       end -%>
+<%     end -%>
+<%   end -%>
+<% end -%>

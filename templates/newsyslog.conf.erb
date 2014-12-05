@@ -1,0 +1,18 @@
+# Managed Puppet.
+#
+
+<% if defined? @error_log && defined? @pid -%>
+# global error log
+<%= @error_log %> 640 7 * $D0 GB <%= @pid %> 30
+<% end -%>
+
+<% if defined? @pool_config -%>
+<%   @pool_config.each do |name, values| -%>
+<%     values.each do |key, value| -%>
+<%       if key == access_log -%>
+# <%= name %> access log
+<%= @value %> 640 7 * $D0 GB <%= @pid %> 30
+<%       end -%>
+<%     end -%>
+<%   end -%>
+<% end -%>
