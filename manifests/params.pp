@@ -24,7 +24,7 @@ class php_fpm::params {
 
   $config                      = "$prefix/etc/php-fpm.conf"
   $config_template             = 'php_fpm/php-fpm.conf.erb'
-  $include                     = "${prefix}/etc/php-fpm.conf"
+  $include                     = "${prefix}/etc/php-fpm.conf.d"
   $pid                         = '/var/run/php-fpm.pid'
   $error_log                   = '/var/log/php-fpm.log'
   $syslog_facility             = 'daemon'
