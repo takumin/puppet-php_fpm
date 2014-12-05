@@ -56,7 +56,7 @@ rlimit_core                 = <%= @rlimit_core %>
 <% if defined? @events_mechanism -%>
 events.mechanism            = <%= @events_mechanism %>
 <% end -%>
-<% if defined? @systemd_interval -%>
+<% if @osfamily == 'Linux' && defined? @systemd_interval -%>
 systemd_interval            = <%= @systemd_interval %>
 <% end -%>
 
