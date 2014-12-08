@@ -30,7 +30,7 @@ class php_fpm (
   $pool_config                 = $::php_fpm::params::pool_config,
 ) inherits ::php_fpm::params {
 
-  # validate parameters here
+  $pool = merge($::php_fpm::params::pool_config, $pool_config)
 
   class { '::php_fpm::install': } ->
   class { '::php_fpm::config': } ~>
