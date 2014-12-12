@@ -5,10 +5,12 @@
 #
 class php_fpm::service {
 
-  service { $::php_fpm::service_name:
-    ensure     => running,
-    enable     => true,
-    hasstatus  => true,
-    hasrestart => true,
+  if $::php_fpm::service_managed {
+    service { $::php_fpm::service_name:
+      ensure     => running,
+      enable     => true,
+      hasstatus  => true,
+      hasrestart => true,
+    }
   }
 }

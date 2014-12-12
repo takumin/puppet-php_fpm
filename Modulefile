@@ -8,3 +8,4 @@ description   ''
 project_page  ''
 
 dependency 'puppetlabs/stdlib'
+dependency 'takumin/php'

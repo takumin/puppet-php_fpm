@@ -4,7 +4,9 @@
 #
 class php_fpm::install {
 
-  package { $::php_fpm::package_name:
-    ensure => present,
+  if $::php_fpm::package_managed {
+    package { $::php_fpm::package_name:
+      ensure => present,
+    }
   }
 }

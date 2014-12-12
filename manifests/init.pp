@@ -8,7 +8,9 @@
 #   Explanation of what this parameter affects and what it defaults to.
 #
 class php_fpm (
+  $package_managed             = $::php_fpm::params::package_managed,
   $package_name                = $::php_fpm::params::package_name,
+  $service_managed             = $::php_fpm::params::service_managed,
   $service_name                = $::php_fpm::params::service_name,
   $config                      = $::php_fpm::params::config,
   $config_template             = $::php_fpm::params::config_template,
@@ -32,6 +34,9 @@ class php_fpm (
 
   $pool = deepmerge($::php_fpm::params::pool_config, $pool_config)
 
+  include php
+
+  Class['::php']
   class { '::php_fpm::install': } ->
   class { '::php_fpm::config': } ~>
   class { '::php_fpm::service': } ->

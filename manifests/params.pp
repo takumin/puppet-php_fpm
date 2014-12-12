@@ -6,13 +6,17 @@
 class php_fpm::params {
   case $::osfamily {
     'Debian', 'RedHat', 'Amazon': {
+      $package_managed  = true
       $package_name     = 'php-fpm'
+      $service_managed  = true
       $service_name     = 'php-fpm'
       $prefix           = ''
       $events_mechanism = 'epoll'
     }
     'FreeBSD': {
-      $package_name     = 'lang/php56'
+      $package_managed  = false
+      $package_name     = undef
+      $service_managed  = true
       $service_name     = 'php-fpm'
       $prefix           = '/usr/local'
       $events_mechanism = 'kqueue'
