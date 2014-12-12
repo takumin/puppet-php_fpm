@@ -10,7 +10,7 @@ class php_fpm::config {
     group        => 0,
     mode         => '0644',
     content      => template($::php_fpm::config_template),
-    validate_cmd => "$::php_fpm::prefix/sbin/php-fpm -t -y %",
+    validate_cmd => "$::php_fpm::prefix/sbin/php-fpm -t -c $::php_fpm::prefix/etc/php.ini -y %",
   }
 
   file { "$::php_fpm::include":
