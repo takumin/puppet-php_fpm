@@ -36,7 +36,7 @@ class php_fpm (
 
   include php
 
-  Class['::php']
+  Class['::php'] ~>
   class { '::php_fpm::install': } ->
   class { '::php_fpm::config': } ~>
   class { '::php_fpm::service': } ->
